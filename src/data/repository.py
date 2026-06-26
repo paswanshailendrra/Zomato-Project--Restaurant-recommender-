@@ -1,4 +1,5 @@
 from typing import List, Set
+import asyncio
 import logging
 from src.models.restaurant import Restaurant
 from src.data.loader import DatasetLoader
@@ -12,16 +13,28 @@ class RestaurantRepository:
         self.preprocessor = preprocessor or Preprocessor()
         self._restaurants: List[Restaurant] = []
         self._initialized = False
+        self._loading = False
 
     def initialize(self):
-        """Loads and preprocesses the dataset."""
+        """Loads and preprocesses the dataset (blocking)."""
         if self._initialized:
             return
         logger.info("Initializing RestaurantRepository...")
-        raw_df = self.loader.load()
-        self._restaurants = self.preprocessor.preprocess(raw_df)
-        self._initialized = True
-        logger.info(f"RestaurantRepository initialized with {len(self._restaurants)} restaurants.")
+        self._loading = True
+        try:
+            raw_df = self.loader.load()
+            self._restaurants = self.preprocessor.preprocess(raw_df)
+            self._initialized = True
+            logger.info(f"RestaurantRepository initialized with {len(self._restaurants)} restaurants.")
+        finally:
+            self._loading = False
+
+    async def initialize_async(self):
+        """Loads and preprocesses the dataset in a background thread (non-blocking)."""
+        if self._initialized:
+            return
+        loop = asyncio.get_event_loop()
+        await loop.run_in_executor(None, self.initialize)
 
     def get_all(self) -> List[Restaurant]:
         self.initialize()
