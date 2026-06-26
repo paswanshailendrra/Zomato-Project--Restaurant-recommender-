@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Results - Epicurean AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#343535",
+                        "on-surface": "#e3e2e2",
+                        "surface-container": "#1e2020",
+                        "background": "#121414",
+                        "outline": "#859399",
+                        "primary-container": "#00d2ff",
+                        "inverse-primary": "#00677f",
+                        "outline-variant": "#3c494e",
+                        "surface-tint": "#47d6ff",
+                        "primary-fixed": "#b6ebff",
+                        "on-surface-variant": "#bbc9cf",
+                        "on-background": "#e3e2e2",
+                        "surface-variant": "#343535",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "surface-container-lowest": "#0d0e0f",
+                        "primary-fixed-dim": "#47d6ff",
+                        "surface-container-high": "#292a2a",
+                        "on-primary-fixed-variant": "#004e60",
+                        "tertiary": "#dfdcdb",
+                        "on-tertiary": "#313030",
+                        "tertiary-container": "#c3c0c0",
+                        "primary": "#a5e7ff",
+                        "inverse-on-surface": "#2f3131",
+                        "on-primary-container": "#00566a",
+                        "secondary-fixed-dim": "#edb1ff",
+                        "surface": "#121414",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-primary-fixed": "#001f28",
+                        "on-secondary-fixed-variant": "#6e208c",
+                        "on-tertiary-container": "#4f4e4e",
+                        "inverse-surface": "#e3e2e2",
+                        "secondary": "#edb1ff",
+                        "surface-bright": "#383939",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "surface-dim": "#121414",
+                        "on-primary": "#003543",
+                        "secondary-container": "#6e208c",
+                        "on-error": "#690005",
+                        "surface-container-low": "#1a1c1c",
+                        "on-secondary": "#520070",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed": "#f9d8ff",
+                        "on-secondary-fixed": "#320046",
+                        "on-secondary-container": "#e498ff",
+                        "tertiary-fixed": "#e5e2e1",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "code-sm": ["JetBrains Mono"],
+                        "body-lg": ["Outfit"],
+                        "display-lg-mobile": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "headline-sm": ["Outfit"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "code-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(52, 53, 53, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(30, 32, 32, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(71, 214, 255, 0.5), transparent);
+            opacity: 0.5;
+        }
+
+        .neon-border {
+            border: 1px solid theme('colors.primary');
+            box-shadow: 0 0 10px rgba(165, 231, 255, 0.2), inset 0 0 10px rgba(165, 231, 255, 0.1);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(165, 231, 255, 0.5);
+        }
+
+        .primary-gradient-text {
+            background: linear-gradient(to right, theme('colors.primary'), theme('colors.secondary'));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .ambient-light {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .bg-light-1 {
+            top: -10%;
+            left: 10%;
+            width: 40vw;
+            height: 40vw;
+            background: theme('colors.primary');
+        }
+
+        .bg-light-2 {
+            bottom: -10%;
+            right: 10%;
+            width: 50vw;
+            height: 50vw;
+            background: theme('colors.secondary');
+        }
+
+        .terminal-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: theme('colors.primary');
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body-md text-body-md relative">
+<div class="ambient-light bg-light-1"></div>
+<div class="ambient-light bg-light-2"></div>
+<!-- TopNavBar -->
+<header class="bg-surface/40 backdrop-blur-xl docked full-width top-0 sticky border-b border-white/10 shadow-[0px_0px_15px_rgba(71,214,255,0.2)] z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">Epicurean AI</div>
+<nav class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-all duration-300" href="#">Discover</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 scale-95 transition-transform hover:text-primary-container" href="#">Top Rated</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-all duration-300" href="#">Help</a>
+</nav>
+<button class="px-6 py-2 rounded-full bg-gradient-to-r from-primary-container to-secondary-container text-white font-label-caps text-label-caps hover:shadow-[0_0_20px_rgba(0,210,255,0.4)] transition-all">Get Started</button>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 relative z-10 flex flex-col gap-12">
+<!-- Summary Banner -->
+<section class="glass-panel rounded-xl p-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">memory</span>
+                AI Synthesis Complete
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+                Based on your preference for high-contrast culinary experiences and ambient dining environments, I have curated a selection that balances avant-garde preparation techniques with atmospheric depth. The following recommendations index highly for sensory complexity and refined execution.
+            </p>
+</section>
+<!-- Results Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Result 1 -->
+<div class="md:col-span-12 glass-card rounded-xl p-1 neon-border">
+<div class="bg-surface-container/50 rounded-lg p-6 md:p-8 flex flex-col md:flex-row gap-8 h-full items-center">
+<div class="w-full md:w-1/3 relative rounded-lg overflow-hidden aspect-[4/3] group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A highly detailed cinematic shot of a modern, avant-garde restaurant interior. The aesthetic is high-tech antigravity, featuring glassmorphic tables, deep charcoal surfaces, and thin glowing electric blue neon accents. A perfectly plated minimalist dish sits on a translucent plate, illuminated by soft, high-key directional lighting in a moody, sophisticated atmosphere. Dark mode, premium feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjOLCoitH08YKbmDb_dRbTHFs8lMohk4ystTtQEkjZ-hm_enLKvTJN-ZdUn23X5rNi4anjMcAlhM-QGuRdwJ-Ny_SSbwpPxX6abWSH-R6mh2xH0qSNSUKivRx4dg_QuRuMdzA21jUPpfEJE7OYfWWXKGuDTRXLtIXGymC5tJAJBz0-axdVjw4Hewg8fym9fah67Lj8HId9GMFllqD4a3tdBQkpR6CkUFHIPL6Am9SVpm4DojQqZPIjlohaAQCnD74zYnOxenwX3t4"/>
+<div class="absolute top-4 left-4 bg-background/80 backdrop-blur-md rounded-full px-4 py-1 flex items-center gap-2 border border-primary/50 shadow-[0_0_10px_rgba(165,231,255,0.3)]">
+<span class="font-label-caps text-label-caps text-primary glow-text">RANK #1</span>
+</div>
+</div>
+<div class="w-full md:w-2/3 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Lumina Gastronomy</h2>
+<div class="flex gap-4 mt-2">
+<span class="px-3 py-1 bg-secondary/15 text-secondary rounded-full font-code-sm text-code-sm">Neo-Nordic</span>
+<span class="px-3 py-1 bg-secondary/15 text-secondary rounded-full font-code-sm text-code-sm">$$$$</span>
+</div>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high rounded-full px-4 py-2 border border-outline-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-headline-sm text-headline-sm text-primary">4.9</span>
+</div>
+</div>
+<div class="bg-surface-container-highest/50 rounded-lg p-4 border border-outline-variant/30 mt-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm">terminal</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">AI Explanation Matrix</span>
+</div>
+<p class="terminal-text text-code-sm leading-relaxed">
+                                &gt; MATCH_SCORE: 98%<br/>
+                                &gt; ANALYZING_VECTORS: [Atmosphere: Weightless] [Technique: Molecular]<br/>
+                                &gt; SYNTHESIS: Lumina excels in translating traditional Nordic preservation techniques into modern, visually stark presentations. The ambient lighting profile aligns perfectly with requested parameters.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Result 2 -->
+<div class="md:col-span-6 glass-card rounded-xl p-1">
+<div class="bg-surface-container/40 rounded-lg p-6 flex flex-col gap-6 h-full">
+<div class="relative rounded-lg overflow-hidden aspect-video group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A macro shot of an innovative fusion cocktail in a sleek, angular glass on a dark charcoal counter. The scene features glowing neon purple accents reflecting off the glass, with a background blur suggesting a high-end, futuristic speakeasy. The lighting is low and moody, emphasizing the vibrant colors of the drink. Antigravity aesthetic, premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkPnlTNhzlsok5OS5eMlwl3adIkRwXDW65JkUCr8QqPXhZ4yd3yqk1W7-ynq2wGH5AtwOVl0flh-Q-79KvNTbJqriSSjJoZSCKYpSfi-JWRLrifQLh6si3bqZDjJw7_rxlmOxz1S8AuwQ6xOL1U9fWpqZPMro6IcMriT_q-1lx2GTQ24DJa1gdhF3ACSb3nYfsYF8u1U_gezzxZpiFje7HZW4XHhRFSmeUZqbAUfrWMYoDSOcZPPoeh9PzJEBI92MPOQE4utBhNzY"/>
+<div class="absolute top-4 left-4 bg-background/80 backdrop-blur-md rounded-full px-3 py-1 border border-secondary/30">
+<span class="font-label-caps text-label-caps text-secondary">RANK #2</span>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-start mb-2">
+<h2 class="font-headline-md text-headline-md text-on-surface">The Void</h2>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-lg text-body-lg text-secondary">4.7</span>
+</div>
+</div>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-1 bg-secondary/10 text-secondary rounded-md font-code-sm text-code-sm text-xs">Japanese Fusion</span>
+<span class="px-2 py-1 bg-secondary/10 text-secondary rounded-md font-code-sm text-code-sm text-xs">$$$</span>
+</div>
+<div class="bg-surface-container-highest/30 rounded-lg p-3 border border-outline-variant/20">
+<p class="terminal-text text-xs leading-relaxed opacity-80">
+                                &gt; MATCH_SCORE: 92%<br/>
+                                &gt; SYNTHESIS: High aesthetic correlation. Focuses on stark, high-contrast omakase experiences.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Result 3 -->
+<div class="md:col-span-6 glass-card rounded-xl p-1">
+<div class="bg-surface-container/40 rounded-lg p-6 flex flex-col gap-6 h-full">
+<div class="relative rounded-lg overflow-hidden aspect-video group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A wide shot of a futuristic dining room set against a sprawling nighttime cityscape seen through floor-to-ceiling glass. The interior is minimal, utilizing glassmorphism elements, dark metallic surfaces, and subtle electric blue floor lighting. The atmosphere is serene, high-tech, and weightless. Premium dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz558sEZg1QTfYx8D1N8lerqvG5pg4E3Bs4yI3kAIZBmGKvMiDWqSuhUEchZ6reDiT5-ntn_XXGNzBHwcAAWhrOmaT45FwgLnDd_PP-_fBgcUv1huwdCoJltOMPkUs5rEw6ajJS8Csc4_cc8BbS6MN64BBZHeoQsnomUT44AYgSo_t5RxKEdv7nfCv3Jukx92IqCuInpWsGhh1mmLVr3Zi-pwVAj-TdYP_RS_a6NwHy_HkoqtBv5m9QEK2doHUC94-auMVBSX06DI"/>
+<div class="absolute top-4 left-4 bg-background/80 backdrop-blur-md rounded-full px-3 py-1 border border-primary/30">
+<span class="font-label-caps text-label-caps text-primary">RANK #3</span>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-start mb-2">
+<h2 class="font-headline-md text-headline-md text-on-surface">Zenith</h2>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-lg text-body-lg text-primary">4.6</span>
+</div>
+</div>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-1 bg-primary/10 text-primary rounded-md font-code-sm text-code-sm text-xs">Contemporary</span>
+<span class="px-2 py-1 bg-primary/10 text-primary rounded-md font-code-sm text-code-sm text-xs">$$$$</span>
+</div>
+<div class="bg-surface-container-highest/30 rounded-lg p-3 border border-outline-variant/20">
+<p class="terminal-text text-xs leading-relaxed opacity-80">
+                                &gt; MATCH_SCORE: 88%<br/>
+                                &gt; SYNTHESIS: Elevated sensory profile. Minimalist plating offsets complex flavor architectures.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest/60 backdrop-blur-md w-full rounded-t-xl border-t border-white/5 mt-24">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-gutter w-full max-w-container-max mx-auto gap-4">
+<div class="font-headline-sm text-headline-sm text-on-surface">Epicurean AI</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant text-center">© 2024 Epicurean AI. Powered by Groq</div>
+<div class="flex gap-6">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  body {
+    @apply bg-background text-on-background antialiased min-h-screen flex flex-col font-body-md text-body-md relative overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: rgba(52, 53, 53, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-card {
+    background: rgba(30, 32, 32, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(71, 214, 255, 0.5), transparent);
+    opacity: 0.5;
+  }
+
+  .neon-border {
+    border: 1px solid theme('colors.primary');
+    box-shadow: 0 0 10px rgba(165, 231, 255, 0.2), inset 0 0 10px rgba(165, 231, 255, 0.1);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 10px rgba(165, 231, 255, 0.5);
+  }
+
+  .primary-gradient-text {
+    background: linear-gradient(to right, theme('colors.primary'), theme('colors.secondary'));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .ambient-light {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  .bg-light-1 {
+    top: -10%;
+    left: 10%;
+    width: 40vw;
+    height: 40vw;
+    background: theme('colors.primary');
+  }
+
+  .bg-light-2 {
+    bottom: -10%;
+    right: 10%;
+    width: 50vw;
+    height: 50vw;
+    background: theme('colors.secondary');
+  }
+
+  .terminal-text {
+    font-family: 'JetBrains Mono', monospace;
+    color: theme('colors.primary');
+  }
+}

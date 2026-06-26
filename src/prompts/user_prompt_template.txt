@@ -1,0 +1,15 @@
+User Preferences:
+- Location: {location}
+- Budget: {budget}
+- Cuisine: {cuisine}
+- Minimum Rating: {min_rating}
+- Additional Preferences: {additional_preferences}
+
+Candidate Restaurants (JSON):
+{candidate_json}
+
+Task:
+1. From the candidate list above, rank the top {top_k} restaurants that best match the user's preferences.
+2. For each recommendation, provide a concise explanation (1-2 sentences) referencing why it fits.
+3. Provide a brief overall summary (1-2 sentences).
+4. Return JSON only — no markdown, no extra text.
