@@ -15,41 +15,27 @@ class DatasetLoader:
 
     def load(self) -> pd.DataFrame:
         """
-        Loads the dataset. Tries local cache first, then Hugging Face,
-        and finally falls back to a mock/fallback CSV if offline.
+        Loads the dataset. Uses the bundled gzip-compressed parquet file 
+        to avoid Hugging Face downloads and OOM issues during deployment.
         """
-        # 1. Try Parquet Cache
+        bundled_file = os.path.join(os.path.dirname(__file__), "zomato_dataset.parquet")
+        
+        if os.path.exists(bundled_file):
+            try:
+                logger.info(f"Loading bundled dataset: {bundled_file}")
+                return pd.read_parquet(bundled_file)
+            except Exception as e:
+                logger.error(f"Failed to load bundled dataset: {e}")
+
+        # Fallback to local cache if bundled file doesn't exist (e.g. local dev fallback)
         if os.path.exists(self.cache_file):
             try:
                 logger.info(f"Loading dataset from local cache: {self.cache_file}")
-                df = pd.read_parquet(self.cache_file)
-                if not df.empty:
-                    return df
+                return pd.read_parquet(self.cache_file)
             except Exception as e:
-                logger.warning(f"Failed to read parquet cache: {e}. Trying Hugging Face.")
+                logger.error(f"Failed to read parquet cache: {e}")
 
-        # 2. Try Hugging Face
-        try:
-            logger.info(f"Downloading dataset from Hugging Face: {self.dataset_name}")
-            dataset = load_dataset(self.dataset_name)
-            split = 'train'
-            if split not in dataset:
-                split = list(dataset.keys())[0]
-            
-            df = dataset[split].to_pandas()
-            
-            # Save to parquet cache
-            try:
-                df.to_parquet(self.cache_file, index=False)
-                logger.info(f"Cached dataset to {self.cache_file}")
-            except Exception as cache_err:
-                logger.warning(f"Could not cache dataset to parquet: {cache_err}")
-                
-            return df
-        except Exception as e:
-            logger.warning(f"Hugging Face download failed: {e}. Trying fallback CSV.")
-
-        # 3. Try Fallback CSV
+        # Try Fallback CSV
         if os.path.exists(self.fallback_file):
             try:
                 logger.info(f"Loading dataset from local fallback: {self.fallback_file}")
@@ -57,7 +43,7 @@ class DatasetLoader:
             except Exception as csv_err:
                 logger.error(f"Failed to read fallback CSV: {csv_err}")
         
-        # 4. Create a minimal mock dataset if absolutely nothing is available
+        # Create a minimal mock dataset if absolutely nothing is available
         logger.warning("No dataset sources available. Creating minimal mock dataset for emergency fallback.")
         mock_data = {
             "name": ["Truffles", "Glen's Bakehouse", "Toit", "Empire Restaurant", "MTR"],
